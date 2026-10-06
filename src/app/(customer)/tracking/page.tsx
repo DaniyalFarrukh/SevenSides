@@ -57,24 +57,29 @@ export default function TrackingPage() {
           </div>
 
           {/* Stepper */}
-          <div className="relative flex justify-between mb-8">
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-muted -translate-y-1/2 z-0" />
+          <div className="relative flex justify-between mb-12">
+            <div className="absolute top-4 left-0 right-0 h-1 bg-muted -translate-y-1/2 z-0" />
             <div 
-              className="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-0 transition-all duration-1000 ease-in-out" 
+              className="absolute top-4 left-0 h-1 bg-primary -translate-y-1/2 z-0 transition-all duration-1000 ease-in-out" 
               style={{ width: `${(currentStep / 3) * 100}%` }}
             />
             
             {STEPS.map((step, index) => {
               const isCompleted = index <= currentStep;
               const isActive = index === currentStep;
-              
+              let alignmentClass = "left-1/2 -translate-x-1/2 text-center";
+              if (index === 0) {
+                alignmentClass = "left-0 text-left";
+              } else if (index === STEPS.length - 1) {
+                alignmentClass = "right-0 text-right";
+              }
+
               return (
                 <div key={step} className="relative z-10 flex flex-col items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-500 ${isCompleted ? 'bg-primary text-white' : 'bg-muted border-2 border-border text-muted-foreground'}`}>
                     {isCompleted ? <Check className="w-4 h-4" /> : <div className="w-2 h-2 rounded-full bg-current" />}
                   </div>
-                  {/* Label hidden on small screens except for active */}
-                  <span className={`text-[10px] sm:text-xs mt-2 font-bold absolute top-full w-24 text-center ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <span className={`text-[10px] sm:text-xs mt-2 font-bold absolute top-full w-16 sm:w-20 leading-tight ${alignmentClass} ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                     {step}
                   </span>
                 </div>
