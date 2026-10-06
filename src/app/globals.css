@@ -65,7 +65,7 @@
     --cream: #FFF8EC;
     --white: #FFFFFF;
     
-    --background: var(--turquoise-tint);
+    --background: var(--cream);
     --foreground: var(--ink);
     --border: var(--ink);
     --ring: var(--yellow);

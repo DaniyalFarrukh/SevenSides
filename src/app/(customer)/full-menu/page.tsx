@@ -70,12 +70,13 @@ export default function FullMenuPage() {
     }
   }, [activeTab]);
 
+  const draggableRef = useRef<Draggable | null>(null);
+
   useEffect(() => {
-    let draggables: Draggable[] = [];
     let lastTapTime = 0;
 
     if (isLightboxOpen && lightboxImgRef.current && lightboxRef.current) {
-      draggables = Draggable.create(lightboxImgRef.current, {
+      draggableRef.current = Draggable.create(lightboxImgRef.current, {
         type: "x,y",
         bounds: lightboxRef.current,
         inertia: true,
@@ -86,17 +87,18 @@ export default function FullMenuPage() {
           }
           lastTapTime = now;
         }
-      });
+      })[0];
       
-      // We don't disable it anymore so onClick always fires,
-      // but recreating it ensures bounds are correct for scale-[2.5]
       document.body.style.overflow = "hidden";
     }
     return () => {
-      draggables.forEach(d => d.kill());
+      if (draggableRef.current) {
+        draggableRef.current.kill();
+        draggableRef.current = null;
+      }
       document.body.style.overflow = "";
     };
-  }, [isLightboxOpen, lightboxZoomed]);
+  }, [isLightboxOpen]); // Do not depend on lightboxZoomed!
 
   const openLightbox = () => {
     setIsLightboxOpen(true);
@@ -107,15 +109,31 @@ export default function FullMenuPage() {
     setIsLightboxOpen(false);
     setLightboxZoomed(false);
     if (lightboxImgRef.current) {
-      gsap.set(lightboxImgRef.current, { x: 0, y: 0 }); // reset pan
+      gsap.set(lightboxImgRef.current, { scale: 1, x: 0, y: 0 }); // reset pan and scale
     }
   };
 
   const toggleZoom = () => {
     setLightboxZoomed(prev => {
       const newZoom = !prev;
-      if (!newZoom && lightboxImgRef.current) {
-        gsap.to(lightboxImgRef.current, { x: 0, y: 0, duration: 0.3 });
+      if (lightboxImgRef.current) {
+        if (newZoom) {
+          gsap.to(lightboxImgRef.current, { 
+            scale: 2.5, 
+            duration: 0.3, 
+            ease: "power2.out",
+            onUpdate: () => draggableRef.current?.update()
+          });
+        } else {
+          gsap.to(lightboxImgRef.current, { 
+            scale: 1, 
+            x: 0, 
+            y: 0, 
+            duration: 0.3, 
+            ease: "power2.out",
+            onUpdate: () => draggableRef.current?.update()
+          });
+        }
       }
       return newZoom;
     });
@@ -290,10 +308,7 @@ export default function FullMenuPage() {
 
           <div 
             ref={lightboxImgRef}
-            className={cn(
-              "relative transition-transform duration-300 origin-center cursor-grab active:cursor-grabbing",
-              lightboxZoomed ? "scale-[2.5]" : "scale-100"
-            )}
+            className="relative origin-center cursor-grab active:cursor-grabbing"
           >
             <Image 
               src={activeImageSrc}
