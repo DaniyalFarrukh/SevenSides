@@ -114,36 +114,38 @@ function ReviewFormContent() {
 
   if (submitted) {
     return (
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center p-8 text-center min-h-[500px]"
-      >
-        <PartyPopper className="w-20 h-20 text-primary mb-6 animate-bounce" />
-        <h1 className="text-4xl font-bold mb-4 font-heading text-foreground">Thank You!</h1>
-        <p className="text-muted-foreground mb-8 text-lg max-w-sm">Your feedback is incredibly valuable to us.</p>
-        
-        <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 mb-8 max-w-sm w-full">
-          <p className="font-bold text-primary mb-1">Here&apos;s 10% Off Your Next Order</p>
-          <div className="bg-background font-mono text-xl py-2 px-4 rounded border-2 border-dashed border-primary inline-block">
-            THANKYOU10
+      <div className="w-full max-w-md mx-auto bg-secondary text-secondary-foreground md:shadow-brutal md:rounded-3xl min-h-screen md:min-h-[700px] flex flex-col relative md:my-8 border-border md:border-brutal">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex flex-col items-center justify-center p-8 text-center flex-1"
+        >
+          <PartyPopper className="w-20 h-20 text-[#F5AC53] mb-6 animate-bounce" />
+          <h1 className="text-4xl font-bold mb-4 font-heading text-white">Thank You!</h1>
+          <p className="text-white/80 mb-8 text-lg max-w-sm">Your feedback is incredibly valuable to us.</p>
+          
+          <div className="bg-white/5 border border-[#F5AC53]/30 rounded-xl p-6 mb-8 max-w-sm w-full shadow-lg shadow-black/20">
+            <p className="font-bold text-[#F5AC53] mb-3">Here&apos;s 10% Off Your Next Order</p>
+            <div className="bg-secondary-dark font-mono text-2xl font-bold py-3 px-6 rounded-lg border-2 border-dashed border-[#F5AC53] text-white inline-block tracking-wider">
+              THANKYOU10
+            </div>
           </div>
-        </div>
-        
-        {!isKiosk && rating >= 4 && (
-          <Button className="w-full max-w-sm mb-4 h-14 text-md font-bold rounded-xl" onClick={() => window.open('https://g.page/r/your-google-link/review')}>
-            Share on Google
-          </Button>
-        )}
-        {!isKiosk && (
-          <Button variant="outline" className="w-full max-w-sm h-14 text-md rounded-xl" onClick={() => window.location.href = '/'}>
-            Back to Menu
-          </Button>
-        )}
-        {isKiosk && (
-          <p className="text-muted-foreground font-bold text-lg mt-4 animate-pulse">Resetting in {countdown}...</p>
-        )}
-      </motion.div>
+          
+          {!isKiosk && rating >= 4 && (
+            <Button className="w-full max-w-sm mb-4 h-14 text-md font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary-hover shadow-md" onClick={() => window.open('https://share.google/UJSVMhdlc6XP7eOGr', '_blank')}>
+              Share on Google
+            </Button>
+          )}
+          {!isKiosk && (
+            <Button variant="outline" className="w-full max-w-sm h-14 text-md font-bold rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white" onClick={() => window.location.href = '/'}>
+              Back to Menu
+            </Button>
+          )}
+          {isKiosk && (
+            <p className="text-white/60 font-bold text-lg mt-4 animate-pulse">Resetting in {countdown}...</p>
+          )}
+        </motion.div>
+      </div>
     );
   }
 
