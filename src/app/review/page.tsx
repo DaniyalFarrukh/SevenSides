@@ -131,13 +131,13 @@ function ReviewFormContent() {
             </div>
           </div>
           
-          {!isKiosk && rating >= 4 && (
-            <Button className="w-full max-w-sm mb-4 h-14 text-md font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary-hover shadow-md" onClick={() => window.open('https://share.google/UJSVMhdlc6XP7eOGr', '_blank')}>
+          {!isKiosk && (
+            <Button className="w-full max-w-sm mb-4 h-14 text-md font-bold rounded-xl bg-[#F5AC53] text-[#151C1A] hover:bg-[#F5AC53]/90 shadow-md" onClick={() => window.open('https://share.google/UJSVMhdlc6XP7eOGr', '_blank')}>
               Share on Google
             </Button>
           )}
           {!isKiosk && (
-            <Button variant="outline" className="w-full max-w-sm h-14 text-md font-bold rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white" onClick={() => window.location.href = '/'}>
+            <Button className="w-full max-w-sm h-14 text-md font-bold rounded-xl bg-white/10 border-2 border-white/20 text-white hover:bg-white/20" onClick={() => window.location.href = '/'}>
               Back to Menu
             </Button>
           )}
