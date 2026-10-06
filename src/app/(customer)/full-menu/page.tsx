@@ -30,6 +30,7 @@ export default function FullMenuPage() {
   const lightboxRef = useRef<HTMLDivElement>(null);
   const lightboxImgRef = useRef<HTMLDivElement>(null);
   const chipsRef = useRef<HTMLDivElement>(null);
+  const lastTapTime = useRef<number>(0);
 
   const activeImageSrc = activeTab === "menu" 
     ? (customMenuBoard || IMAGES.menuBoard.src) 
@@ -70,15 +71,25 @@ export default function FullMenuPage() {
   }, [activeTab]);
 
   useEffect(() => {
-    // Setup draggable for lightbox
     let draggables: Draggable[] = [];
+    let lastTapTime = 0;
+
     if (isLightboxOpen && lightboxImgRef.current && lightboxRef.current) {
       draggables = Draggable.create(lightboxImgRef.current, {
         type: "x,y",
         bounds: lightboxRef.current,
         inertia: true,
-        disabled: !lightboxZoomed
+        onClick: function() {
+          const now = Date.now();
+          if (now - lastTapTime < 300) {
+            toggleZoom();
+          }
+          lastTapTime = now;
+        }
       });
+      
+      // We don't disable it anymore so onClick always fires,
+      // but recreating it ensures bounds are correct for scale-[2.5]
       document.body.style.overflow = "hidden";
     }
     return () => {
@@ -101,12 +112,13 @@ export default function FullMenuPage() {
   };
 
   const toggleZoom = () => {
-    if (!lightboxImgRef.current) return;
-    const newZoom = !lightboxZoomed;
-    setLightboxZoomed(newZoom);
-    if (!newZoom) {
-      gsap.to(lightboxImgRef.current, { x: 0, y: 0, duration: 0.3 });
-    }
+    setLightboxZoomed(prev => {
+      const newZoom = !prev;
+      if (!newZoom && lightboxImgRef.current) {
+        gsap.to(lightboxImgRef.current, { x: 0, y: 0, duration: 0.3 });
+      }
+      return newZoom;
+    });
   };
 
   const handleShare = async () => {
@@ -282,7 +294,6 @@ export default function FullMenuPage() {
               "relative transition-transform duration-300 origin-center cursor-grab active:cursor-grabbing",
               lightboxZoomed ? "scale-[2.5]" : "scale-100"
             )}
-            onDoubleClick={toggleZoom}
           >
             <Image 
               src={activeImageSrc}
