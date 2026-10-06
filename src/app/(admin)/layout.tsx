@@ -5,7 +5,7 @@ import { useState } from "react";
 import { 
   LayoutDashboard, ShoppingCart, Users, MapPin, 
   Settings, LogOut, Package, Tag, Star, Truck,
-  Bell, Search, Menu, X, Calendar, Globe
+  Bell, Search, Menu, X, Calendar, Globe, MessageSquare
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ const NAV_ITEMS = [
   { href: "/admin/promotions", icon: Tag, label: "Promotions" },
   { href: "/admin/customers", icon: Users, label: "Customers" },
   { href: "/admin/loyalty", icon: Star, label: "Loyalty & CRM" },
+  { href: "/admin/reviews", icon: MessageSquare, label: "Customer Reviews", badge: "New" },
   { href: "/admin/fleet", icon: Truck, label: "Fleet" },
   { href: "/admin/settings", icon: Settings, label: "Settings" },
 ];

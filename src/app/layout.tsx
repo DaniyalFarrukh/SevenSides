@@ -34,7 +34,7 @@ export default function RootLayout({
         dir="ltr"
         className={`${inter.variable} ${bebasNeue.variable} h-full antialiased`}
       >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-dots">
         {children}
         <DemoSwitcher />
       </body>

@@ -104,6 +104,20 @@ export default function TrackingPage() {
           </div>
         </div>
 
+        {currentStep === 3 && (
+          <div className="bg-primary text-primary-foreground rounded-3xl p-6 shadow-xl mb-6 text-center animate-in fade-in slide-in-from-bottom-4">
+            <h2 className="text-xl font-bold font-heading mb-2">How did we do?</h2>
+            <p className="text-sm opacity-90 mb-4">Your feedback helps us improve.</p>
+            <Button 
+              variant="secondary" 
+              className="w-full font-bold" 
+              onClick={() => router.push('/review?order=7S-8921&src=web')}
+            >
+              Rate Your Order
+            </Button>
+          </div>
+        )}
+
         <Button variant="outline" className="w-full bg-background/80 backdrop-blur" onClick={() => router.push("/")}>
           Back to Home
         </Button>

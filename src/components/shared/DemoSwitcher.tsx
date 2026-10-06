@@ -40,7 +40,12 @@ export function DemoSwitcher() {
         <Link href="/features" className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg w-full justify-start bg-muted text-foreground hover:bg-accent transition-colors">
           Features Printout
         </Link>
-        
+        <Link href="/qr" className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg w-full justify-start bg-muted text-foreground hover:bg-accent transition-colors">
+          Printable QR Codes
+        </Link>
+        <Link href="/review?branch=1&table=5&src=qr" className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg w-full justify-start bg-muted text-foreground hover:bg-accent transition-colors">
+          Customer Review Demo
+        </Link>
         <div className="h-px w-full bg-border my-2" />
         
         <Button variant="outline" className="w-full border-border text-muted-foreground hover:text-foreground hover:bg-muted bg-transparent text-xs" onClick={() => { localStorage.clear(); window.location.reload(); }}>

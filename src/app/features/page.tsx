@@ -69,6 +69,21 @@ export default function FeaturesPage() {
             <li><strong>Fleet Tracking:</strong> Admin map to monitor rider locations and performance.</li>
           </ul>
         </section>
+
+        {/* Section 5 */}
+        <section className="col-span-1 md:col-span-2 mt-4 bg-primary/5 p-6 rounded-lg border border-primary/20">
+          <h2 className="text-2xl font-bold mb-4 text-primary border-b pb-2 border-primary/20">5. Automated Customer Reviews (Feedback Loop)</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <ul className="space-y-4">
+              <li><strong>Multi-Channel Collection:</strong> Collect reviews via QR codes on tables, order tracking pages, or in-store Kiosk tablets.</li>
+              <li><strong>Dynamic Kiosk Mode:</strong> Auto-resetting, large touch-friendly UI for capturing in-store dining feedback effortlessly.</li>
+            </ul>
+            <ul className="space-y-4">
+              <li><strong>Actionable Admin Alerts:</strong> Immediate dashboard alerts for 1-2 star reviews so managers can instantly recover angry customers via WhatsApp.</li>
+              <li><strong>Google Reviews Booster:</strong> Automatically asks 4 & 5-star reviewers to post their feedback publicly on Google Maps.</li>
+            </ul>
+          </div>
+        </section>
       </div>
 
       <section className="mt-12 pt-8 border-t-2 border-dashed">

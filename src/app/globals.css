@@ -65,7 +65,7 @@
     --cream: #FFF8EC;
     --white: #FFFFFF;
     
-    --background: var(--cream);
+    --background: var(--turquoise-tint);
     --foreground: var(--ink);
     --border: var(--ink);
     --ring: var(--yellow);
@@ -115,9 +115,10 @@
   }
   
   .bg-dots {
-    background-image: radial-gradient(var(--ink) 1.5px, transparent 1.5px);
+    background-image: radial-gradient(var(--turquoise-dark) 1.5px, transparent 1.5px);
     background-size: 24px 24px;
     background-position: 0 0;
+    opacity: 0.8;
   }
 }
 
